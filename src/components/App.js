@@ -4,6 +4,7 @@ import { CssBaseline } from '@material-ui/core';
 
 import Header from './Header';
 import Footer from './Footer';
+import HomeScreen from './Home/HomeScreen';
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
         <Header />
         <main>
           <Switch>
-            <Route exact path="/"></Route>
+            <Route exact path="/">
+              <HomeScreen />
+            </Route>
           </Switch>
         </main>
         <Footer />
