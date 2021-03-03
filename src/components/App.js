@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container';
 import Header from './Header';
 import Footer from './Footer';
 import HomeScreen from './home/HomeScreen';
+import NovelCategoryScreen from './novel_category/NovelCategoryScreen';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -25,7 +26,11 @@ function App() {
         <Header />
         <main>
           <Switch>
-            <Route path="/novel_category"></Route>
+            <Route path="/novel_category">
+              <Container className={classes.cardGrid} maxWidth="md">
+                <NovelCategoryScreen />
+              </Container>
+            </Route>
             <Route exact path="/">
               <Container className={classes.cardGrid} maxWidth="md">
                 <HomeScreen />
