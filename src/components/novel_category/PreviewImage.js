@@ -4,7 +4,11 @@ export class PreviewImage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { imageData: null };
+    this.setFileData = props.setFileData;
+
+    this.state = {
+      imageData: null,
+    };
 
     this.fileInput = createRef();
   }
@@ -16,30 +20,30 @@ export class PreviewImage extends Component {
       const file = files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.setState({ imageData: e.target.result });
+        const imageData = e.target.result;
+        this.setState({ imageData });
+        this.setFileData({ file, imageData });
       };
       reader.readAsDataURL(file);
     } else {
       this.setState({ imageData: null });
+      this.setFileData({ file: null, imageData: null });
     }
   }
 
   resetInput() {
     this.fileInput.current.value = '';
     this.setState({ imageData: null });
+    this.setFileData({ file: null, imageData: null });
   }
 
   render() {
-    const imageData = this.state.imageData;
+    const { imageData } = this.state;
     let preview = '';
     let resetButton = '';
 
     if (imageData !== null) {
-      preview = (
-        <div>
-          <img src={imageData} width="64" />
-        </div>
-      );
+      preview = <img src={imageData} width="64" />;
       resetButton = (
         <button type="button" onClick={() => this.resetInput()}>
           Reset
@@ -56,8 +60,8 @@ export class PreviewImage extends Component {
           onChange={(e) => this.onFileChange(e)}
           ref={this.fileInput}
         />
-        {resetButton}
         {preview}
+        {resetButton}
       </div>
     );
   }
