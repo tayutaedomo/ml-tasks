@@ -14,8 +14,26 @@ const NovelCategoryScreen = () => {
 
     setUploading(true);
 
+    const createRandomStr = (len) => {
+      len = len || 10;
+      const chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let s = '';
+      for (var i = 0; i < len; i++) {
+        s += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return s;
+    };
+
+    const createFileName = (original) => {
+      const extension = original.split('.')[1].toLowerCase();
+      return `${createRandomStr(10)}.${extension}`;
+    };
+
+    const newName = createFileName(file.name);
     const metadata = { contentType: file.type };
-    const url = await putFileToNovelCategory(file.name, imageData, metadata);
+
+    const url = await putFileToNovelCategory(newName, imageData, metadata);
 
     setUploading(false);
     setFileData({ file: null, imageData: null });
