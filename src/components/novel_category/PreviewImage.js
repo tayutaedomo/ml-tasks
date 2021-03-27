@@ -1,8 +1,8 @@
-import React, { createRef, useState } from 'react';
+import React, { useState, createRef } from 'react';
 
 const PreviewImage = ({ setFileData }) => {
   const [imageData, setImageData] = useState(null);
-  const fileInput = createRef();
+  const fileRef = createRef();
 
   const onFileChange = (e) => {
     const files = e.target.files;
@@ -23,7 +23,7 @@ const PreviewImage = ({ setFileData }) => {
   };
 
   const resetInput = () => {
-    fileInput.current.value = '';
+    fileRef.current.value = '';
     setImageData(null);
     setFileData({ file: null, imageData: null });
   };
@@ -47,7 +47,7 @@ const PreviewImage = ({ setFileData }) => {
         accept="image/png,image/jpeg,image/jpg"
         placeholder="Image File"
         onChange={(e) => onFileChange(e)}
-        ref={fileInput}
+        ref={fileRef}
       />
       {preview}
       {resetButton}

@@ -32,15 +32,12 @@ export const putFileToNovelCategory = async (fileName, data, metadata) => {
   const fileRef = storageRef.child(filePath);
 
   return new Promise((resolve, reject) => {
-    console.log({ filePath });
     fileRef
       .put(data, metadata)
       .then((task) => {
-        console.log({ task });
         return fileRef.getDownloadURL();
       })
       .then((url) => {
-        console.log({ url });
         resolve(url);
       })
       .catch((err) => {
