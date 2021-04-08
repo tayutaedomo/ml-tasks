@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import PreviewImage from './PreviewImage';
 
 import { putFileToNovelCategory } from '../../utils/firebase';
@@ -35,25 +37,29 @@ const NovelCategoryScreen = () => {
 
     const url = await putFileToNovelCategory(newName, imageData, metadata);
 
+    console.log('Put completed.', url);
+
     setUploading(false);
     setFileData({ file: null, imageData: null });
-
-    console.log('Completed.', url);
   };
 
   return (
     <div>
       <h2>書影ジャンル推論</h2>
-      <form>
-        <PreviewImage setFileData={setFileData} />
-        <button
-          type="button"
-          disabled={!fileData.file || uploading}
-          onClick={onClick}
-        >
-          実行
-        </button>
-      </form>
+      {uploading ? (
+        <CircularProgress />
+      ) : (
+        <form>
+          <PreviewImage setFileData={setFileData} />
+          <button
+            type="button"
+            disabled={!fileData.file || uploading}
+            onClick={onClick}
+          >
+            実行
+          </button>
+        </form>
+      )}
     </div>
   );
 };
