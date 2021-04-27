@@ -1,17 +1,21 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import { useHistory } from 'react-router';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 export default function Header() {
+  const history = useHistory();
+
+  const onLinkClick = () => {
+    history.push('/');
+  };
+
   return (
     <AppBar position="relative">
       <Toolbar>
         <Typography variant="h6" color="inherit" noWrap>
-          <Link color="initial" href="/">
+          <div style={{ cursor: 'pointer' }} onClick={onLinkClick}>
             ML Task Manager
-          </Link>
+          </div>
         </Typography>
       </Toolbar>
     </AppBar>
