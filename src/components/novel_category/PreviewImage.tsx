@@ -1,8 +1,12 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, createRef, VFC, ReactNode } from 'react';
 
-const PreviewImage = ({ setFileData }) => {
+type Props = {
+  setFileData: any;
+};
+
+const PreviewImage: VFC<Props> = ({ setFileData }) => {
   const [imageData, setImageData] = useState(null);
-  const fileRef = createRef();
+  const fileRef = createRef<HTMLInputElement>();
 
   const onFileChange = (e) => {
     const files = e.target.files;
@@ -28,8 +32,8 @@ const PreviewImage = ({ setFileData }) => {
     setFileData({ file: null, imageData: null });
   };
 
-  let preview = '';
-  let resetButton = '';
+  let preview: ReactNode;
+  let resetButton: ReactNode;
 
   if (imageData !== null) {
     preview = <img src={imageData} width="64" />;

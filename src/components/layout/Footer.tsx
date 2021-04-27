@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { VFC } from 'react';
 import styled from 'styled-components';
 import { Link, Typography } from '@material-ui/core';
 
@@ -20,13 +20,13 @@ function Copyright() {
   );
 }
 
-export default function Footer() {
+const Footer: VFC = () => {
   return (
     <SFooter>
       <Copyright />
     </SFooter>
   );
-}
+};
 
 const SFooter = styled.footer`
   background-color: #fff;
@@ -37,3 +37,5 @@ const SFooter = styled.footer`
   bottom: 0;
   width: 100%;
 `;
+
+export default Footer;

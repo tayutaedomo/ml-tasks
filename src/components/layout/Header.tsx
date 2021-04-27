@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { VFC } from 'react';
 import { useHistory } from 'react-router';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
-export default function Header() {
+const Header: VFC = () => {
   const history = useHistory();
 
   const onLinkClick = () => {
@@ -20,4 +20,6 @@ export default function Header() {
       </Toolbar>
     </AppBar>
   );
-}
+};
+
+export default Header;
