@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { VFC } from 'react';
 
 import Router from './router/Router';
 
-function App() {
+const App: VFC = () => {
   return (
     <>
       <Router />
     </>
   );
-}
+};
 
 export default App;

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, VFC } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import PreviewImage from './PreviewImage';
 
 import { putFileToNovelCategory } from '../../utils/firebase';
 
-const NovelCategoryScreen = () => {
+const NovelCategory: VFC = () => {
   const [fileData, setFileData] = useState({ file: null, imageData: null });
   const [uploading, setUploading] = useState(false);
 
@@ -64,4 +64,4 @@ const NovelCategoryScreen = () => {
   );
 };
 
-export default NovelCategoryScreen;
+export default NovelCategory;

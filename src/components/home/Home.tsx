@@ -1,10 +1,9 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import { Box } from '@material-ui/core';
+import React, { VFC } from 'react';
+import { Box, Grid } from '@material-ui/core';
 
 import HomeCard from './HomeCard';
 
-export default function Home() {
+const Home: VFC = () => {
   return (
     <Box pt={4}>
       <Grid container spacing={4}>
@@ -18,4 +17,6 @@ export default function Home() {
       </Grid>
     </Box>
   );
-}
+};
+
+export default Home;
