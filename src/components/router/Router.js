@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import DefaultLayout from '../layout/DefaultLayout';
 import Page404 from '../Page404';
 import Home from '../home/Home';
-import NovelCategoryScreen from '../novel_category/NovelCategoryScreen';
+import NovelCategory from '../novel_category/NovelCategory';
 
 const Router = () => {
   return (
@@ -12,7 +12,7 @@ const Router = () => {
       <Switch>
         <Route path="/novel_category">
           <DefaultLayout>
-            <NovelCategoryScreen />
+            <NovelCategory />
           </DefaultLayout>
         </Route>
         <Route exact path="/">
