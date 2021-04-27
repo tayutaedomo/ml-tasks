@@ -8,7 +8,7 @@ type Props = {
   dispatchFile: Dispatch<ActionType>;
 };
 
-const PreviewImage: VFC<Props> = (props) => {
+const FileForm: VFC<Props> = (props) => {
   const { fileData, dispatchFile } = props;
   const fileRef = createRef<HTMLInputElement>();
 
@@ -62,4 +62,4 @@ const PreviewImage: VFC<Props> = (props) => {
   );
 };
 
-export default PreviewImage;
+export default FileForm;

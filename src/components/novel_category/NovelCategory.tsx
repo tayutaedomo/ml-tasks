@@ -1,7 +1,7 @@
 import React, { useReducer, useState, VFC } from 'react';
 import { Box, Button, CircularProgress, Typography } from '@material-ui/core';
 
-import PreviewImage from './PreviewImage';
+import FileForm from './FileForm';
 import { putFileToNovelCategory } from '../../utils/firebase';
 
 export type FileData = {
@@ -69,13 +69,13 @@ const NovelCategory: VFC = () => {
       <Box mt={2}>
         <Typography variant="h5">書影ジャンル推論</Typography>
       </Box>
-      <Box mt={4}>
+      <Box mt={2}>
         {uploading ? (
           <CircularProgress />
         ) : (
           <form>
             <Box mb={1}>
-              <PreviewImage fileData={fileData} dispatchFile={dispatchFile} />
+              <FileForm fileData={fileData} dispatchFile={dispatchFile} />
             </Box>
             <Button
               color="primary"
