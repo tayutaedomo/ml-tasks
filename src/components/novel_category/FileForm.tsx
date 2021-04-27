@@ -1,7 +1,16 @@
 import React, { createRef, VFC, Dispatch } from 'react';
-import { Box, Button } from '@material-ui/core';
+import { Box, Button, makeStyles } from '@material-ui/core';
 
 import { FileData, ActionType } from './NovelCategory';
+import PreviewCard from './PreviewCard';
+
+const useStyles = makeStyles((theme) => ({
+  inputFile: {
+    opacity: 0,
+    appearance: 'none',
+    position: 'absolute',
+  },
+}));
 
 type Props = {
   fileData: FileData;
@@ -31,32 +40,39 @@ const FileForm: VFC<Props> = (props) => {
     dispatchFile({ type: 'reset' });
   };
 
+  const classes = useStyles();
+
   return (
     <>
       {fileData.imageData && (
-        <Box mr={1}>
-          <img src={fileData.imageData} width="64" />
+        <Box my={1}>
+          <PreviewCard
+            imageData={fileData.imageData}
+            name={fileData.file?.name}
+          />
         </Box>
       )}
-      <input
-        accept="image/png,image/jpeg,image/jpg"
-        multiple={false}
-        onChange={(e) => handleChange(e.target.files)}
-        placeholder="Image File"
-        ref={fileRef}
-        type="file"
-      />
+      <Button component="label" variant="contained" color="default">
+        Choose File
+        <input
+          accept="image/png,image/jpeg,image/jpg"
+          className={classes.inputFile}
+          multiple={false}
+          onChange={(e) => handleChange(e.target.files)}
+          placeholder="Image File"
+          ref={fileRef}
+          type="file"
+        />
+      </Button>
       {fileData.imageData && (
-        <Box mt={1}>
-          <Button
-            color="default"
-            onClick={() => resetInput()}
-            type="button"
-            variant="contained"
-          >
-            Reset
-          </Button>
-        </Box>
+        <Button
+          color="default"
+          onClick={() => resetInput()}
+          type="button"
+          variant="contained"
+        >
+          Reset
+        </Button>
       )}
     </>
   );

@@ -84,7 +84,7 @@ const NovelCategory: VFC = () => {
               type="button"
               variant="contained"
             >
-              実行
+              Predict
             </Button>
           </form>
         )}
