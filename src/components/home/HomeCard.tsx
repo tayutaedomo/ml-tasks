@@ -1,13 +1,7 @@
 import React, { ReactNode, VFC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-} from '@material-ui/core';
+import { Card, CardContent, Link, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -30,19 +24,16 @@ const HomeCard: VFC<Props> = (props) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
-      <CardContent className={classes.cardContent}>
-        <Typography gutterBottom variant="h5" component="h2">
-          {props.headline}
-        </Typography>
-        <Typography>{props.content}</Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" color="primary" component={Link} to={props.to}>
-          View
-        </Button>
-      </CardActions>
-    </Card>
+    <Link underline="none" component={RouterLink} to={props.to}>
+      <Card className={classes.card}>
+        <CardContent className={classes.cardContent}>
+          <Typography gutterBottom variant="h5" component="h2">
+            {props.headline}
+          </Typography>
+          <Typography>{props.content}</Typography>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };
 
