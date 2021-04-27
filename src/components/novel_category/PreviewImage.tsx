@@ -1,61 +1,64 @@
-import React, { useState, createRef, VFC, ReactNode } from 'react';
+import React, { createRef, VFC, Dispatch } from 'react';
+import { Box, Button } from '@material-ui/core';
+
+import { FileData, ActionType } from './NovelCategory';
 
 type Props = {
-  setFileData: any;
+  fileData: FileData;
+  dispatchFile: Dispatch<ActionType>;
 };
 
-const PreviewImage: VFC<Props> = ({ setFileData }) => {
-  const [imageData, setImageData] = useState(null);
+const PreviewImage: VFC<Props> = (props) => {
+  const { fileData, dispatchFile } = props;
   const fileRef = createRef<HTMLInputElement>();
 
-  const onFileChange = (e) => {
-    const files = e.target.files;
-
+  const handleChange = (files: FileList) => {
     if (files.length > 0) {
-      const file = files[0];
+      const file: File = files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
-        const imageData = e.target.result;
-        setImageData(imageData);
-        setFileData({ file, imageData });
+        const imageData = e.target.result.toString();
+        dispatchFile({ type: 'choose', file, imageData });
       };
       reader.readAsDataURL(file);
     } else {
-      setImageData(null);
-      setFileData({ file: null, imageData: null });
+      dispatchFile({ type: 'reset' });
     }
   };
 
   const resetInput = () => {
     fileRef.current.value = '';
-    setImageData(null);
-    setFileData({ file: null, imageData: null });
+    dispatchFile({ type: 'reset' });
   };
 
-  let preview: ReactNode;
-  let resetButton: ReactNode;
-
-  if (imageData !== null) {
-    preview = <img src={imageData} width="64" />;
-    resetButton = (
-      <button type="button" onClick={() => resetInput()}>
-        Reset
-      </button>
-    );
-  }
-
   return (
-    <div>
+    <>
+      {fileData.imageData && (
+        <Box mr={1}>
+          <img src={fileData.imageData} width="64" />
+        </Box>
+      )}
       <input
-        type="file"
         accept="image/png,image/jpeg,image/jpg"
+        multiple={false}
+        onChange={(e) => handleChange(e.target.files)}
         placeholder="Image File"
-        onChange={(e) => onFileChange(e)}
         ref={fileRef}
+        type="file"
       />
-      {preview}
-      {resetButton}
-    </div>
+      {fileData.imageData && (
+        <Box mt={1}>
+          <Button
+            color="default"
+            onClick={() => resetInput()}
+            type="button"
+            variant="contained"
+          >
+            Reset
+          </Button>
+        </Box>
+      )}
+    </>
   );
 };
 
