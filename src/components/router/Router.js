@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import DefaultLayout from '../layout/DefaultLayout';
 import Page404 from '../Page404';
-import HomeScreen from '../home/HomeScreen';
+import Home from '../home/Home';
 import NovelCategoryScreen from '../novel_category/NovelCategoryScreen';
 
 const Router = () => {
@@ -17,7 +17,7 @@ const Router = () => {
         </Route>
         <Route exact path="/">
           <DefaultLayout>
-            <HomeScreen />
+            <Home />
           </DefaultLayout>
         </Route>
         <Route exact path="*">
